@@ -4,9 +4,9 @@
 <head>
   <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-reveal')</script>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Fukagawa · Fine Dining</title>
-  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
@@ -722,7 +722,7 @@
     }
 
     .origin {
-      padding: clamp(110px, 12vw, 190px) 7% clamp(40px, 4vw, 70px);
+      padding: clamp(110px, 12vw, 190px) 7% 2.5vw;
       display: grid;
       grid-template-columns: 1.15fr 1fr;
       gap: 12%;
@@ -1011,7 +1011,7 @@
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      padding: clamp(70px, 7vw, 120px) 7% clamp(90px, 9vw, 150px);
+      padding: 7vw 7% 4.8vw;
       --s: 0
     }
 
@@ -1066,143 +1066,121 @@
     }
 
 
-    /* Die Karte: wie die gedruckte Karte am Tisch. Ein Blatt auf der Mittelachse der Seite,
-       Papierkante leicht gerissen, feine Körnung, gesetzt wie die Karte im Restaurant:
-       Gänge in gesperrten Versalien, Zutaten kursiv, Gruppen durch einen Punkt getrennt.
-       Umschalten oben in der Art der Navigation: Versalien, aktive Ansicht unterstrichen. */
-    .karte {
-      padding: clamp(70px, 7vw, 120px) 7% clamp(110px, 11vw, 180px);
-      display: grid;
-      grid-template-columns: 1fr;
-      position: relative
-    }
-
-    .karte-intro {
-      position: absolute;
-      left: 7%;
-      top: calc(clamp(70px, 7vw, 120px) + 6vw);
-      width: 19vw
-    }
-
+    /* Die Karte: wie die gedruckte Karte im Restaurant, A4 quer mit zwei gerahmten Spalten.
+       Gestaltet auf 1123 × 794 px (A4 quer bei 96 dpi) und über --u auf die verfügbare Breite skaliert,
+       damit die ganze Karte auf einen Blick lesbar ist. Klick vergrößert sie. Auf dem Handy stehen die
+       Spalten untereinander und die Schrift läuft normal. Papier mit Büttenkante, Körnung und leichter Tinte. */
+    .karte { padding: 7vw 7% 0 }
+    .karte-intro { max-width: 30ch }
     .karte-intro h2 { margin: 0; font: italic 300 clamp(26px, 2.7vw, 42px)/1.1 Newsreader, Georgia, serif }
     .karte-intro p { margin: 1.5vw 0 0; font: 400 max(13px, 1.25vw)/1.5 Newsreader, Georgia, serif }
     .karte-intro p + p { margin-top: .7em }
 
-    .karte-stage { justify-self: center; width: min(660px, 44vw); margin-top: 6vw }
-
-    .karte-tabs { display: flex; justify-content: center; gap: 34px; margin-bottom: 34px }
-
+    .karte-stage { width: min(100%, calc((100svh - 150px) * 1.4144), 1123px); margin: clamp(36px, 4vw, 64px) auto 0 }
+    .karte-tabs { display: flex; justify-content: center; gap: 34px; margin-bottom: 28px }
     .karte-tabs button {
-      position: relative;
-      border: 0;
-      background: none;
-      padding: 5px 0;
-      color: var(--ink);
-      font: 500 var(--label-size)/1.3 var(--sans);
-      letter-spacing: var(--label-spacing);
-      text-transform: uppercase;
-      cursor: pointer;
-      opacity: .55;
-      transition: opacity .25s
+      position: relative; border: 0; background: none; padding: 5px 0; color: var(--ink);
+      font: 500 var(--label-size)/1.3 var(--sans); letter-spacing: var(--label-spacing); text-transform: uppercase;
+      cursor: pointer; opacity: .55; transition: opacity .25s
     }
-
     .karte-tabs button::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .3s ease
+      content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: currentColor;
+      transform: scaleX(0); transform-origin: left; transition: transform .3s ease
     }
-
-    .karte-tabs button:hover { opacity: 1 }
-    .karte-tabs button[aria-selected=true] { opacity: 1 }
+    .karte-tabs button:hover, .karte-tabs button[aria-selected=true] { opacity: 1 }
     .karte-tabs button[aria-selected=true]::after { transform: scaleX(1) }
     .karte-tabs button:focus-visible { outline: 1px solid; outline-offset: 6px }
 
+    .sheet-wrap { container-type: inline-size; cursor: zoom-in }
     .sheet {
-      position: relative;
-      isolation: isolate;
-      padding: 84px 64px 72px;
-      text-align: center;
-      color: #24211d
+      --u: calc(100cqw / 1123);
+      --ink2: #57534c;
+      position: relative; isolation: isolate; width: 100%; aspect-ratio: 1123 / 794;
+      color: #24211d; font-family: Newsreader, Georgia, serif; text-align: center
     }
-
-    .sheet-head, .sheet-body, .sheet-foot { filter: url(#ink) }
-
     .sheet::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background-color: #fbfaf6;
+      content: ""; position: absolute; inset: 0; z-index: -1; background-color: #fbfaf6;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .28 0 0 0 0 .24 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
-      box-shadow: 0 1px 1px #2b2a2712, 0 22px 40px -26px #2b2a2740;
-      filter: url(#deckle)
+      box-shadow: 0 1px 1px #2b2a2712, 0 22px 40px -26px #2b2a2740; filter: url(#deckle)
     }
-
-    .sheet-head b { display: block; font: 500 13px/1 var(--sans); letter-spacing: .5em; margin-right: -.5em }
-    .sheet-head i { display: block; margin-top: 16px; font: italic 300 29px/1.2 Newsreader, Georgia, serif }
-    .sheet-head::after { content: ""; display: block; width: 34px; height: 1px; background: currentColor; opacity: .35; margin: 36px auto 0 }
-
-    .sheet-body { transition: opacity .35s ease }
-    .sheet-body.fade { opacity: 0 }
-
-    .course { margin: 32px 0 0 }
-    .course b {
-      display: block;
-      font: 400 16.5px/1.4 Newsreader, Georgia, serif;
-      letter-spacing: .22em;
-      margin-right: -.24em;
-      text-transform: uppercase
+    .sheet :where(p) { margin: 0 }
+    .sheet-cols { position: absolute; inset: calc(var(--u) * 38.5); display: flex; justify-content: space-between; transition: opacity .35s ease }
+    .sheet-cols.fade { opacity: 0 }
+    /* Gestaltung wie das erste Kartenblatt: keine Rahmen, Rubriken in gesperrten Versalien,
+       Zutaten leicht und kursiv in neutralem Grau, Preise in der schlanken Montserrat. */
+    .panel {
+      width: calc(var(--u) * 477); height: 100%;
+      display: flex; flex-direction: column; align-items: center; padding: calc(var(--u) * 50) calc(var(--u) * 16) calc(var(--u) * 36);
+      filter: url(#ink)
     }
-
-    .course b sup { font-size: .7em; letter-spacing: 0; margin-left: 1px }
-    .course i { display: block; margin-top: 6px; font: italic 300 19px/1.45 Newsreader, Georgia, serif; color: #57534c }
-    .course .price { font: 400 12px/1 var(--sans); letter-spacing: .08em; font-style: normal; color: #24211d; margin-left: 12px }
-    .course.solo b { letter-spacing: .24em }
-
-    .pause { margin: 36px 0 2px; font: 400 26px/1 Newsreader, Georgia, serif; opacity: .5 }
-    .cat { margin: 54px 0 0; font: 500 11px/1 var(--sans); letter-spacing: .32em; margin-right: -.32em; text-transform: uppercase; opacity: .6 }
-    .cat:first-child { margin-top: 36px }
-
-    .sheet-prices { display: flex; justify-content: center; gap: 60px; margin-top: 58px }
-    .sheet-prices span { display: block; font: 500 11px/1 var(--sans); letter-spacing: .28em; text-transform: uppercase; opacity: .6 }
-    .sheet-prices strong { display: block; margin-top: 12px; font: 300 31px/1 Newsreader, Georgia, serif }
-    .sheet-note { margin: 26px 0 0; font: italic 300 16px/1.5 Newsreader, Georgia, serif; color: #57534c }
-    .sheet-extra { margin: 30px 0 0 }
-    .sheet-foot { margin: 54px 0 0; font: italic 300 19px/1.4 Newsreader, Georgia, serif }
+    .s-brand { font: 500 calc(var(--u) * 12)/1 var(--sans); letter-spacing: .5em; margin-right: -.5em }
+    .s-sub { margin-top: calc(var(--u) * 14); font: italic 300 calc(var(--u) * 24)/1.1 Newsreader, Georgia, serif }
+    .s-rule { width: calc(var(--u) * 30); height: 1px; background: currentColor; opacity: .35; margin-top: calc(var(--u) * 20) }
+    .s-head { display: flex; flex-direction: column; align-items: center; margin-bottom: calc(var(--u) * 6) }
+    .s-head.ghost { visibility: hidden }
+    .s-sec { margin-top: calc(var(--u) * 26); font: 500 calc(var(--u) * 9.5)/1 var(--sans); letter-spacing: .32em; margin-right: -.32em; text-transform: uppercase; opacity: .6 }
+    .s-head + .s-sec { margin-top: calc(var(--u) * 22) }
+    .s-item { margin-top: calc(var(--u) * 15) }
+    .s-sec + .s-item { margin-top: calc(var(--u) * 14) }
+    .s-head + .s-item { margin-top: calc(var(--u) * 30) }
+    .s-name { font: 400 calc(var(--u) * 14.5)/1.15 Newsreader, Georgia, serif; letter-spacing: .22em; margin-right: -.22em; text-transform: uppercase; white-space: nowrap }
+    .s-name sup { font-size: .7em; letter-spacing: 0; margin-left: 1px }
+    .s-veg { font-style: italic; font-weight: 300; text-transform: none; letter-spacing: 0; margin-left: .4em; font-size: .85em; color: var(--ink2) }
+    .s-desc { margin-top: calc(var(--u) * 4); font: italic 300 calc(var(--u) * 16)/1.3 Newsreader, Georgia, serif; color: var(--ink2); white-space: nowrap }
+    .s-price { font: 400 calc(var(--u) * 10.5)/1 var(--sans); letter-spacing: .08em; font-style: normal; color: #24211d; margin-left: 1em }
+    .s-pause { margin-top: calc(var(--u) * 18); font: 400 calc(var(--u) * 22)/.6 Newsreader, Georgia, serif; opacity: .5 }
+    .s-prices { display: flex; gap: calc(var(--u) * 50); margin-top: calc(var(--u) * 34) }
+    .s-prices span { display: block; font: 500 calc(var(--u) * 9.5)/1 var(--sans); letter-spacing: .28em; text-transform: uppercase; opacity: .6 }
+    .s-prices strong { display: block; margin-top: calc(var(--u) * 10); font: 300 calc(var(--u) * 26)/1 Newsreader, Georgia, serif }
+    .s-end { margin-top: auto; display: flex; flex-direction: column; align-items: center }
+    .s-note { font: italic 300 calc(var(--u) * 13)/1.4 Newsreader, Georgia, serif; color: var(--ink2) }
+    .s-bye { margin-top: calc(var(--u) * 16); font: italic 300 calc(var(--u) * 16)/1.2 Newsreader, Georgia, serif }
+    /* Breiter Desktop: Text links wie bei Raum und Küche, Karte rechts daneben.
+       Darunter wäre die Karte daneben zu klein zum Lesen, dort steht sie unter dem Text. */
+    @media (min-width:1280px) {
+      .karte { display: grid; grid-template-columns: 19vw minmax(0, 1fr); gap: 0 4vw; align-items: start; padding-top: 9.2vw }
+      .karte-stage { width: auto; max-width: min(1123px, calc((100svh - 150px) * 1.4144)); margin: 0 }
+    }
+    .karte-hint { margin-top: 18px; text-align: center; font: 400 11px/1.6 var(--sans); letter-spacing: .06em; opacity: .55 }
 
     .karte-book { margin-top: 30px; text-align: center; font: 400 12px/1.8 var(--sans) }
     .karte-book a { font-weight: 500; letter-spacing: .2em; text-transform: uppercase; font-size: var(--label-size); border-bottom: 1px solid; padding-bottom: 4px }
     .karte-book span { display: block; margin-top: 12px; opacity: .7 }
 
-    @media (max-width:1000px) {
-      .karte { padding: 70px 6% 110px }
-      .karte-intro { position: static; width: auto }
-      .karte-intro p { margin-top: 18px; font-size: 17px; line-height: 1.55 }
-      .karte-stage { width: 100%; max-width: 660px; margin-top: 48px }
+    /* Vergrößerte Ansicht */
+    .karte-zoom { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; overflow: visible }
+    .karte-zoom::backdrop { background: rgba(29, 28, 26, .72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px) }
+    .karte-zoom .sheet-wrap { width: min(94vw, 94svh * 1.4144); cursor: zoom-out }
+    .karte-zoom-close {
+      position: fixed; top: 22px; right: 26px; border: 0; background: none; color: #f5f3ee; cursor: pointer;
+      font: 500 var(--label-size)/1 var(--sans); letter-spacing: var(--label-spacing); text-transform: uppercase
     }
 
-    @media (max-width:520px) {
-      .sheet { padding: 56px 20px 48px }
-      .course b { font-size: 15px; letter-spacing: .18em; margin-right: -.18em }
-      .course i { font-size: 17px }
+    @media (max-width:760px) {
+      .karte { padding: 70px 6% 110px }
+      .karte-intro p { margin-top: 18px; font-size: 17px; line-height: 1.55 }
+      .karte-stage { width: 100% }
       .karte-tabs { gap: 20px }
-      .sheet-prices { gap: 32px }
+      .sheet-wrap { cursor: default }
+      .sheet { --u: 1px; aspect-ratio: auto; padding: 22px 16px }
+      .sheet-cols { position: static; flex-direction: column; gap: 16px }
+      .panel { width: 100%; height: auto; padding: 44px 14px 40px }
+      .s-head.ghost { display: none }
+      .s-name, .s-desc { white-space: normal; line-height: 1.35 }
+      .s-end { margin-top: 36px }
+      .karte-hint { display: none }
     }
 
     @media (prefers-reduced-motion:reduce) {
-      .sheet-body, .karte-tabs button::after { transition: none }
+      .sheet-cols, .karte-tabs button::after { transition: none }
     }
     /* Das 深 im Hero blasser und weicher als im ursprünglichen Entwurf. */
     .stage .characters { opacity: .2; filter: url(#organic) blur(10px) }
     /* Team und Kontakt nutzen dieselbe Achsen-Komposition wie Raum und Küche. */
-    .team, .contact { padding: clamp(70px, 7vw, 120px) 7% clamp(90px, 9vw, 150px) }
+    /* Abstände so gewählt, dass zwischen allen Sections derselbe Rhythmus entsteht wie zwischen Raum und Küche (12,5 vw). */
+    .team { padding: 7vw 7% 0 }
+    .contact { padding: 7vw 7% 17.5vw }
+    .team .comp + .comp { margin-top: 7.6vw }
     .person .name { margin: 14px 0 0; font: 400 max(13px, 1.15vw)/1.4 Newsreader, Georgia, serif }
     .person .name i { font-style: italic; font-weight: 300; opacity: .75 }
     .comp .person figure { position: relative; width: 100% }
@@ -1279,6 +1257,54 @@
     .js-reveal figure.rv img, .js-reveal .rv figure img { transform: scale(1.06); transition: transform 1.8s cubic-bezier(.16, 1, .3, 1); transition-delay: var(--rd, 0s) }
     .js-reveal figure.rv.in img, .js-reveal .rv.in figure img { transform: none }
     .origin-big span { display: inline-block }
+    /* Zweiter schwebender Button für Gruppen und Events: gleiche Form wie „Tisch reservieren“,
+       aber hell und zurückhaltend, damit die Reservierung die Hauptaktion bleibt. */
+    .event-fixed {
+      position: fixed; z-index: 20; right: calc(7% + var(--book-w, 236px) + 12px); bottom: 7svh;
+      display: flex; align-items: center; padding: 19px 24px;
+      background: #f5f3eee6; color: var(--ink); border: 1px solid #272b2740;
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      font: 500 10px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase;
+      transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .4s, background .3s, border-color .3s
+    }
+    .event-fixed:hover { transform: translateY(-2px); background: #f5f3ee; border-color: var(--ink) }
+    .event-fixed.away { opacity: 0; pointer-events: none; transform: translateY(12px) }
+    @media (max-width:700px) {
+      .event-fixed { right: 6%; bottom: calc(16px + var(--book-h, 40px) + 8px + env(safe-area-inset-bottom)); padding: 14px 16px; font-size: 8.5px; letter-spacing: .18em }
+    }
+    /* Auf dem Handy würden die schwebenden Buttons Name und Adresse im Hero verdecken.
+       Dort stehen sie erst, wenn der Hero vorbei ist; "Tisch reservieren" ist oben in der Navigation. */
+    @media (max-width:700px) {
+      body.in-hero .booking-fixed, body.in-hero .event-fixed { opacity: 0; pointer-events: none; transform: translateY(12px) }
+    }
+    /* Beide schwebenden Buttons sitzen in einem gemeinsamen Container: gleiche Höhe, gleiche Grundlinie,
+       fester Abstand. Hover ändert nur Farbe und Innenlinie, nichts verschiebt sich. */
+    .cta-fixed {
+      position: fixed; z-index: 20; right: 7%; bottom: 7svh;
+      display: flex; align-items: stretch; gap: 10px;
+      transition: opacity .4s, transform .5s cubic-bezier(.2, .7, .2, 1)
+    }
+    .cta-fixed.away { opacity: 0; pointer-events: none; transform: translateY(12px) }
+    .cta-fixed .booking-fixed, .cta-fixed .event-fixed {
+      position: relative; inset: auto; right: auto; bottom: auto; transform: none; opacity: 1; pointer-events: auto;
+      width: auto; height: 50px; box-sizing: border-box; padding: 0 26px; border-radius: 0;
+      display: flex; align-items: center; gap: 14px;
+      font: 500 10px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase;
+      transition: background .3s, color .3s, border-color .3s, box-shadow .3s
+    }
+    .cta-fixed .booking-fixed { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); box-shadow: 0 10px 30px #1d1c1a2e }
+    .cta-fixed .event-fixed { background: #f5f3eee6; color: var(--ink); border: 1px solid #272b2740; box-shadow: 0 10px 30px #1d1c1a14 }
+    .cta-fixed .booking-fixed:hover, .cta-fixed .event-fixed:hover { transform: none }
+    .cta-fixed .booking-fixed:hover { background: #34332f }
+    .cta-fixed .event-fixed:hover { background: #f5f3ee; border-color: var(--ink) }
+    .cta-fixed .booking-fixed::before { inset: 4px; border-radius: 0; border: 1px solid #f5f3ee40; transition: inset .3s }
+    .cta-fixed .booking-fixed:hover::before { inset: 4px }
+    @media (max-width:700px) {
+      .cta-fixed { right: 6%; left: 6%; bottom: calc(14px + env(safe-area-inset-bottom)); gap: 8px }
+      .cta-fixed .booking-fixed, .cta-fixed .event-fixed { flex: 1 1 0; justify-content: center; height: 44px; padding: 0 10px; font-size: 8.5px; letter-spacing: .16em; gap: 8px }
+      .cta-fixed .booking-fixed::after { width: 10px }
+      body.in-hero .cta-fixed { opacity: 0; pointer-events: none; transform: translateY(12px) }
+    }
   </style>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
@@ -1307,14 +1333,16 @@
       </filter>
     </defs>
   </svg>
-  <header><a class="identity" href="#" aria-label="Fukagawa, zum Seitenanfang"><span class="mark"
+  <header><a class="identity" href="#" aria-label="Fukagawa, Startseite"><span class="mark"
         aria-hidden="true">深川</span><span class="wordmark">FUKAGAWA</span></a>
-    <nav aria-label="Menüs"><a href="#menue" data-select-menu="carte">À la carte</a><a href="#menue"
-        data-select-menu="omni">Dinner-Menü</a><a href="https://bookings.zenchef.com/results?rid=381424" target="_blank"
+    <nav aria-label="Hauptnavigation"><a href="#menue" data-select-menu="carte">Die Karte</a><a href="events.html">Gruppen &amp; Events</a><a href="https://bookings.zenchef.com/results?rid=381424" target="_blank"
         rel="noopener noreferrer">Tisch reservieren</a></nav>
   </header>
-  <a class="booking-fixed" href="https://bookings.zenchef.com/results?rid=381424" target="_blank"
-    rel="noopener noreferrer"><span>Tisch reservieren</span></a>
+  <div class="cta-fixed">
+    <a class="event-fixed" href="events.html#anfrage"><span>Event anfragen</span></a>
+    <a class="booking-fixed" href="https://bookings.zenchef.com/results?rid=381424" target="_blank"
+      rel="noopener noreferrer"><span>Tisch reservieren</span></a>
+  </div>
   <main>
     <section class="hero">
       <div class="stage">
@@ -1389,22 +1417,27 @@
     <section class="karte" id="menue" aria-label="Die Karte">
       <div class="karte-intro">
         <h2><em>Die Karte</em></h2>
-        <p>Zwei Wege durch den Abend: à la carte nach eigener Wahl, oder das Dinner-Menü als komponierte Abfolge, omnivor oder vegetarisch.</p>
-        <p>Dienstag bis Samstag, 17 bis 23 Uhr.</p>
+        <p>Zwei Wege durch den Abend: à la carte nach eigener Wahl, oder das Menü als komponierte Abfolge, omnivor oder vegetarisch.</p>
+        <p>Dienstag bis Samstag, 17&nbsp;bis&nbsp;23&nbsp;Uhr.</p>
       </div>
       <div class="karte-stage">
         <div class="karte-tabs" role="tablist" aria-label="Karte wählen">
-          <button role="tab" aria-selected="true" aria-controls="sheet" data-karte="omni">Dinner-Menü</button>
+          <button role="tab" aria-selected="true" aria-controls="sheet" data-karte="carte">À la carte</button>
+          <button role="tab" aria-selected="false" aria-controls="sheet" data-karte="omni">Omnivor</button>
           <button role="tab" aria-selected="false" aria-controls="sheet" data-karte="veg">Vegetarisch</button>
-          <button role="tab" aria-selected="false" aria-controls="sheet" data-karte="carte">À la carte</button>
         </div>
-        <article class="sheet" id="sheet" role="tabpanel" aria-live="polite">
-          <div class="sheet-head"><b>FUKAGAWA</b><i id="sheet-title">Dinner-Menü</i></div>
-          <div class="sheet-body" id="sheet-body"></div>
-          <p class="sheet-foot">Wir wünschen Ihnen einen genussvollen Abend</p>
-        </article>
+        <div class="sheet-wrap" id="sheet-wrap" role="button" tabindex="0" aria-label="Karte vergrößern">
+          <article class="sheet" id="sheet" role="tabpanel" aria-live="polite">
+            <div class="sheet-cols" id="sheet-cols"></div>
+          </article>
+        </div>
+        <p class="karte-hint">Zum Vergrößern auf die Karte klicken</p>
         <p class="karte-book"><a href="https://bookings.zenchef.com/results?rid=381424" target="_blank" rel="noopener noreferrer">Tisch reservieren</a><span>oder telefonisch unter +49 152 06669229</span></p>
       </div>
+      <dialog class="karte-zoom" id="karte-zoom" aria-label="Karte vergrößert">
+        <button class="karte-zoom-close" type="button" id="karte-zoom-close">Schließen</button>
+        <div class="sheet-wrap" id="karte-zoom-wrap"></div>
+      </dialog>
     </section>
     <!-- Team -->
     <section class="v4 team" id="team" aria-label="Das Team">
@@ -1451,20 +1484,20 @@
     <footer class="site-footer" id="footer">
       <div class="foot-grid">
         <div><p class="foot-label">Kontakt</p><p><a href="tel:+4915206669229">+49 152 06669229</a><br><a href="mailto:business@fukagawa-finedining.de">business@fukagawa-finedining.de</a><br><a href="https://www.instagram.com/fukagawaberlin/" target="_blank" rel="noopener noreferrer">@fukagawaberlin</a></p></div>
-        <div><p class="foot-label">Seiten</p><p><a href="#raum">Der Raum</a><br><a href="#kueche">Die Küche</a><br><a href="#menue">Die Karte</a><br><a href="#team">Das Team</a><br><a href="#kontakt">Kontakt</a></p></div>
+        <div><p class="foot-label">Seiten</p><p><a href="#raum">Der Raum</a><br><a href="#kueche">Die Küche</a><br><a href="#menue">Die Karte</a><br><a href="events.html">Gruppen &amp; Events</a><br><a href="#team">Das Team</a><br><a href="#kontakt">Kontakt</a></p></div>
         <div><p class="foot-label">Standort</p><p><a href="https://maps.app.goo.gl/bbgmE8re2gehDmbk6" target="_blank" rel="noopener noreferrer">Fichtestraße 31<br>10967 Berlin</a></p><p class="foot-label" style="margin-top:28px">Öffnungszeiten</p><p>Dienstag – Samstag<br>17:00 – 23:00 Uhr</p></div>
         <div><p class="foot-label">Newsletter</p><form class="foot-news" id="news"><label class="vh" for="news-mail">E-Mail-Adresse</label><input id="news-mail" type="email" placeholder="E-Mail-Adresse" required><button type="submit" aria-label="Anmelden">→</button></form><p class="foot-small">Briefe aus dem Fukagawa, ein paar Mal im Jahr.</p></div>
       </div>
       <div class="foot-base">
         <span class="foot-mark"><span class="mark" aria-hidden="true">深川</span>FUKAGAWA</span>
-        <span>© 2026 Fukagawa · <a href="#">Impressum</a> · <a href="#">Datenschutz</a></span>
+        <span>© 2026 Fukagawa · <a href="impressum.html">Impressum</a> · <a href="impressum.html#datenschutz">Datenschutz</a></span>
         <a class="foot-michelin" href="https://guide.michelin.com/de/de/berlin-region/berlin/restaurant/fukagawa-fine-dining" target="_blank" rel="noopener noreferrer"><img src="michelin-auswahl-2026.png" alt="Restaurant Selection – MICHELIN Guide 2026" width="44" height="44"><span>Ausgewählt im<br>Guide MICHELIN 2026</span></a>
       </div>
     </footer>
   </main>
   <script>
     const hero = document.querySelector('.hero'), head = document.querySelector('header'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let scheduled = false; function update() { scheduled = false; const r = hero.getBoundingClientRect(), p = reduce ? 0 : Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))); hero.style.setProperty('--p', p); head.classList.toggle('dark', p > .8 && r.bottom > 70); head.classList.toggle('solid', r.bottom <= 70) }
+    let scheduled = false; function update() { scheduled = false; const r = hero.getBoundingClientRect(), p = reduce ? 0 : Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))); hero.style.setProperty('--p', p); head.classList.toggle('dark', p > .8 && r.bottom > 70); head.classList.toggle('solid', r.bottom <= 70); document.body.classList.toggle('in-hero', r.bottom > innerHeight * .9) }
     addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update) } }, { passive: true }); addEventListener('resize', update); update();
 
     const slides = [...document.querySelectorAll('.photo .slide')];
@@ -1489,46 +1522,104 @@
     addEventListener('scroll', () => { if (!iScheduled) { iScheduled = true; requestAnimationFrame(updateImp) } }, { passive: true });
     addEventListener('resize', updateImp); updateImp();
 
-    // Die Karte: Inhalte von fukagawa-finedining.de (Stand 02.10.2026).
+    // Die Karte. À la carte nach der gedruckten Karte (A4 quer, Stand Oktober 2026),
+    // Menüs omnivor und vegetarisch von fukagawa-finedining.de. Jede Karte hat zwei Spalten.
+    // Blöcke: ['sec', Titel] · ['item', Name, Beschreibung, Preis, Optionen] · ['pause'] · ['prices'] · ['end', Notiz]
+    const MENU_PRICES = ['prices'], NOT_SHORT = '° im kurzen Menü nicht enthalten';
     const KARTE = {
-      omni: { title: 'Dinner-Menü', groups: [
-        [['Ochazuke'], ['Les Trois Bouchées'], ['Hokkaido Shokupan']],
-        [['Tarutaru', 'Onglet · Gurke · Ponzu'], ['Unagi', 'Aal · Erbse · Kartoffeldashi'], ['Paitan', 'Gänseleber · Anko · Sakura', 1]],
-        [['Asari', 'Steinbutt · Zucchini · Venusmuschel'], ['Chawanmushi', 'Wagyu · Tomate · Passionsfrucht', 1]],
-        [['Shiso Kakigori', '', 1], ['Ichigo', 'Molkesud · Shoyu-Karamell · Erdbeere'], ['Petit Fours']]
-      ], extra: ['Auf Wunsch', 'Der perfekte Ramen-Biss · Hamachi · Tintenfisch mit Trüffel'] },
-      veg: { title: 'Vegetarisches Menü', groups: [
-        [['Ochazuke'], ['Tsukemono'], ['Hokkaido Shokupan']],
-        [['Chashu', 'Schwarzwurzel · Sakura · Karotte'], ['Negi', 'Nori · Orange · Sake', 1], ['Shiro', 'Pommes Anna · Shiso · Comté'], ['Gyoza', 'Knollensellerie · Myoga · Sencha'], ['Usukuchi', 'Dry-Aged Rote Bete · Tonburi · Yuzu-Koshō', 1]],
-        [['Shiso Kakigori', '', 1], ['Ichigo', 'Flugmango · Sesam · Passionsfrucht'], ['Petit Fours']]
+      carte: { title: 'À la carte', cols: [
+        [['sec', 'Amuse'],
+         ['item', 'Brot und Butter', 'Japanisches Milchbrot · Nori-Butter', '6'],
+         ['item', 'Gillardeau Auster', 'Natur mit Zitrone', '6'],
+         ['item', 'Gillardeau Auster', 'Yuzu · Shiso', '8'],
+         ['sec', 'Vorspeisen'],
+         ['item', 'Tartar vom Onglet', 'US Prime Onglet · Gurke · Ponzu', '24'],
+         ['item', 'Kohlrabi', 'Sesam · Mango · Kürbis', '17', { veg: 1 }],
+         ['item', 'Hamachi', 'Gochugaru · Fenchel · Sardine', '22'],
+         ['sec', 'Zwischengang'],
+         ['item', 'Japanischer Unagi', 'Aal · Erbse · Kartoffel-Dashi', '25'],
+         ['item', 'Der perfekte Ramen-Biss', 'Hühner-Dashi · Ramen', '25', { more: ['mit Ossetra-Kaviar', '+12'] }]],
+        [['sec', 'Hauptgänge'],
+         ['item', 'Wagyu Trüffel Ravioli', 'Trüffel · Wagyu Japan A5', '37'],
+         ['item', 'Maitake Japanese BBQ', 'Süßkartoffel · Ingwerjus · Maitake', '27', { veg: 1 }],
+         ['item', 'Wagyu Shortrib & Entrecôte', 'Wagyu² · Chicorée · Petersilienwurzelpüree', '48'],
+         ['item', 'Steinbutt', 'Zucchini · Venusmuschel · Szechuanpfeffer', '29'],
+         ['sec', 'Dessert'],
+         ['item', 'Crème brûlée', 'Chili · Sesam · Orange', '13'],
+         ['item', 'Choux au Craquelin', 'Schokolade · Miso', '14'],
+         ['item', 'Ichigo', 'Molkesud · Shoyu-Karamell · Erdbeere', '16'],
+         ['end', 'Preise in Euro inkl. MwSt. · Austern pro Stück']]
       ] },
-      carte: { title: 'À la carte', cats: [
-        ['Amuse', [['Brot und Butter', 'Japanisches Milchbrot · Nori-Butter', '6'], ['Gillardeau Auster', 'Natur mit Zitrone', '6'], ['Gillardeau Auster', 'Yuzu · Shiso', '8']]],
-        ['Vorspeisen', [['Tartar vom Onglet', 'US Prime Onglet · Gurke · Ponzu', '24'], ['Kohlrabi', 'Sesam · Mango · Kürbis · vegetarisch', '17'], ['Hamachi', 'Gochugaru · Fenchel · Sardine', '22']]],
-        ['Hauptgänge', [['Wagyu Trüffel Ravioli', 'Trüffel · Wagyu Japan A5', '37'], ['Maitake Japanese BBQ', 'Süßkartoffel · Ingwerjus · Maitake · vegetarisch', '27'], ['Wagyu Shortrib & Entrecôte', 'Wagyu² · Chicorée · Petersilienwurzelpüree', '48'], ['Steinbutt', 'Zucchini · Venusmuschel · Szechuanpfeffer', '29']]],
-        ['Dessert', [['Crème brûlée', 'Chili · Sesam · Orange', '13'], ['Choux au Craquelin', 'Schokolade · Miso', '14']]]
+      omni: { title: 'Menü · omnivor', cols: [
+        [['item', 'Ochazuke'], ['item', 'Les Trois Bouchées'], ['item', 'Hokkaido Shokupan'],
+         ['pause'],
+         ['item', 'Tarutaru', 'Onglet · Gurke · Ponzu'],
+         ['item', 'Unagi', 'Aal · Erbse · Kartoffeldashi'],
+         ['item', 'Paitan', 'Gänseleber · Anko · Sakura', '', { long: 1 }],
+         ['pause'],
+         ['item', 'Asari', 'Steinbutt · Zucchini · Venusmuschel'],
+         ['item', 'Chawanmushi', 'Wagyu · Tomate · Passionsfrucht', '', { long: 1 }]],
+        [['item', 'Shiso Kakigori', '', '', { long: 1 }],
+         ['item', 'Ichigo', 'Molkesud · Shoyu-Karamell · Erdbeere'],
+         ['item', 'Petit Fours'],
+         ['sec', 'Auf Wunsch'],
+         ['item', '', 'Der perfekte Ramen-Biss · Hamachi · Tintenfisch mit Trüffel'],
+         MENU_PRICES,
+         ['end', NOT_SHORT]]
+      ] },
+      veg: { title: 'Menü · vegetarisch', cols: [
+        [['item', 'Ochazuke'], ['item', 'Tsukemono'], ['item', 'Hokkaido Shokupan'],
+         ['pause'],
+         ['item', 'Chashu', 'Schwarzwurzel · Sakura · Karotte'],
+         ['item', 'Negi', 'Nori · Orange · Sake', '', { long: 1 }],
+         ['item', 'Shiro', 'Pommes Anna · Shiso · Comté'],
+         ['item', 'Gyoza', 'Knollensellerie · Myoga · Sencha'],
+         ['item', 'Usukuchi', 'Dry-Aged Rote Bete · Tonburi · Yuzu-Koshō', '', { long: 1 }]],
+        [['item', 'Shiso Kakigori', '', '', { long: 1 }],
+         ['item', 'Ichigo', 'Flugmango · Sesam · Passionsfrucht'],
+         ['item', 'Petit Fours'],
+         MENU_PRICES,
+         ['end', NOT_SHORT]]
       ] }
     };
-    const sheetBody = document.getElementById('sheet-body'), sheetTitle = document.getElementById('sheet-title');
-    const course = ([name, desc, flag], price) => `<div class="course"><b>${name}${flag === 1 ? '<sup>°</sup>' : ''}</b>${desc || price ? `<i>${desc || ''}${price ? `<span class="price">${price}</span>` : ''}</i>` : ''}</div>`;
+    const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const dots = t => esc(t).split(' · ').join('<span aria-hidden="true"> · </span>');
+    function block(bk) {
+      const [type, a, b, c, o = {}] = bk;
+      if (type === 'sec') return `<p class="s-sec">${esc(a)}</p>`;
+      if (type === 'pause') return '<p class="s-pause" aria-hidden="true">·</p>';
+      if (type === 'prices') return '<div class="s-prices"><div><span>Langes Menü</span><strong>162 €</strong></div><div><span>Kurzes Menü</span><strong>96 €</strong></div></div>';
+      if (type === 'end') return `<div class="s-end"><p class="s-note">${esc(a)}</p><p class="s-bye">Wir wünschen Ihnen einen genussvollen Abend</p></div>`;
+      const name = a ? `<p class="s-name">${esc(a)}${o.long ? '<sup>°</sup>' : ''}${o.veg ? '<span class="s-veg">(vegetarisch)</span>' : ''}</p>` : '';
+      const desc = b || c ? `<p class="s-desc">${dots(b || '')}${c ? `<span class="s-price">${esc(c)}</span>` : ''}</p>` : '';
+      const more = o.more ? `<p class="s-desc">${esc(o.more[0])}<span class="s-price">${esc(o.more[1])}</span></p>` : '';
+      return `<div class="s-item">${name}${desc}${more}</div>`;
+    }
     function karteHTML(k) {
       const d = KARTE[k];
-      if (d.cats) return d.cats.map(([cat, items]) => `<p class="cat">${cat}</p>` + items.map(it => course([it[0], it[1]], it[2])).join('')).join('') +
-        '<p class="sheet-note">Preise in Euro inkl. MwSt. · Austern pro Stück</p>';
-      return d.groups.map(g => g.map(c => course(c)).join('')).join('<p class="pause" aria-hidden="true">·</p>') +
-        '<div class="sheet-prices"><div><span>Langes Menü</span><strong>162 €</strong></div><div><span>Kurzes Menü</span><strong>96 €</strong></div></div>' +
-        '<p class="sheet-note">° im kurzen Menü nicht enthalten</p>' +
-        (d.extra ? `<div class="sheet-extra"><p class="cat" style="margin-top:0">${d.extra[0]}</p><div class="course"><i>${d.extra[1]}</i></div></div>` : '');
+      return d.cols.map((col, i) => `<div class="panel"><div class="s-head${i ? ' ghost' : ''}"${i ? ' aria-hidden="true"' : ''}><p class="s-brand">FUKAGAWA</p><p class="s-sub">${esc(d.title)}</p><span class="s-rule"></span></div>${col.map(block).join('')}</div>`).join('');
     }
+    const sheetCols = document.getElementById('sheet-cols');
     function showKarte(k, animate) {
       document.querySelectorAll('[data-karte]').forEach(b => b.setAttribute('aria-selected', b.dataset.karte === k));
-      const swap = () => { sheetTitle.textContent = KARTE[k].title; sheetBody.innerHTML = karteHTML(k); sheetBody.classList.remove('fade') };
+      const swap = () => { sheetCols.innerHTML = karteHTML(k); sheetCols.classList.remove('fade') };
       if (!animate || reduce) return swap();
-      sheetBody.classList.add('fade'); setTimeout(swap, 300);
+      sheetCols.classList.add('fade'); setTimeout(swap, 300);
     }
     document.querySelectorAll('[data-karte]').forEach(b => b.addEventListener('click', () => showKarte(b.dataset.karte, true)));
     document.querySelectorAll('[data-select-menu]').forEach(a => a.addEventListener('click', () => showKarte(a.dataset.selectMenu, false)));
-    showKarte('omni', false);
+    showKarte('carte', false);
+
+    // Karte vergrößern (nur dort, wo sie als ganzes Blatt erscheint)
+    const zoom = document.getElementById('karte-zoom'), zoomWrap = document.getElementById('karte-zoom-wrap'), sheetWrap = document.getElementById('sheet-wrap');
+    const openZoom = () => {
+      if (innerWidth <= 760 || !zoom.showModal) return;
+      zoomWrap.innerHTML = ''; const c = document.getElementById('sheet').cloneNode(true); c.removeAttribute('id'); c.querySelector('.sheet-cols').removeAttribute('id'); zoomWrap.appendChild(c);
+      zoom.showModal();
+    };
+    sheetWrap.addEventListener('click', openZoom);
+    sheetWrap.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZoom() } });
+    zoom.addEventListener('click', () => zoom.close());
 
     // Auftauchen beim Scrollen
     if (document.documentElement.classList.contains('js-reveal')) {
@@ -1542,7 +1633,8 @@
 
     // Reservieren-Button blendet über dem Footer aus
     const bookBtn = document.querySelector('.booking-fixed'), footEl = document.getElementById('footer');
-    new IntersectionObserver(es => es.forEach(e => bookBtn.classList.toggle('away', e.isIntersecting)), { threshold: 0 }).observe(footEl);
+    const cta = document.querySelector('.cta-fixed');
+    new IntersectionObserver(es => es.forEach(e => cta.classList.toggle('away', e.isIntersecting)), { threshold: 0 }).observe(footEl);
 
     // Newsletter ohne Backend
     document.getElementById('news').addEventListener('submit', e => { e.preventDefault(); e.target.outerHTML = '<p>Danke. Der nächste Brief kommt zu dir.</p>' });

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Leonardo Tsubasa · Links</title>
+  <meta name="description" content="Leonardo Tsubasa Donati, Koch und Mitgründer von Fukagawa in Berlin. Restaurants, Videos und Kontakt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
+  <style>
+    /* Link-Seite für Leonardos Personal Brand. Gleiche Welt wie die Website (Creme, Ink, Montserrat und Newsreader,
+       scharfe Bildkanten, Haarlinien), aber persönlicher und direkter: eine schmale Spalte fürs Handy,
+       Links als ruhige Zeilen statt Linktree-Pillen. Das Impressum steht oben rechts und unten, klein, aber sofort sichtbar. */
+    :root {
+      --paper: #f5f3ee;
+      --ink: #272b27;
+      --ink2: #6b6a64;
+      --hair: #272b2726;
+      --sans: Montserrat, Arial, sans-serif;
+      --serif: Newsreader, Georgia, serif
+    }
+
+    * { box-sizing: border-box }
+    html { -webkit-text-size-adjust: 100% }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.5 var(--serif); -webkit-font-smoothing: antialiased }
+    a { color: inherit; text-decoration: none }
+    img { display: block; max-width: 100% }
+    p, h1, h2, ul { margin: 0; padding: 0 }
+    a:focus-visible { outline: 1px solid; outline-offset: 4px }
+
+    .label { font: 500 9.5px/1.4 var(--sans); letter-spacing: .28em; text-transform: uppercase }
+
+    /* Kopfzeile: nur das Impressum, rechts oben. So ist es ohne Scrollen erreichbar. */
+    .top { display: flex; justify-content: flex-end; align-items: center; max-width: 520px; margin: 0 auto; padding: 22px 24px 0 }
+    .top .legal { opacity: .7; border-bottom: 1px solid currentColor; padding-bottom: 3px; transition: opacity .2s }
+    .top .legal:hover { opacity: 1 }
+
+    main { max-width: 520px; margin: 0 auto; padding: 0 24px }
+
+    /* Porträt als Fenster, wie die Bildfenster der Website, hier rund */
+    .intro { padding: 36px 0 34px; text-align: center }
+    .portrait { width: 46%; max-width: 210px; margin: 0 auto; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #e9e6df }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18% }
+    .intro h1 { margin-top: 26px; font: italic 300 36px/1.05 var(--serif); letter-spacing: -.01em }
+    .intro .line { margin: 18px auto 0; max-width: 30ch; font: 400 17px/1.5 var(--serif) }
+
+    .cta { display: flex; gap: 8px; margin-top: 28px }
+    .cta a {
+      position: relative; flex: 1 1 0; height: 50px; display: flex; align-items: center; justify-content: center; gap: 12px;
+      font: 500 9.5px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; transition: background .3s, border-color .3s
+    }
+    .cta .dark { background: var(--ink); color: var(--paper) }
+    .cta .dark::before { content: ""; position: absolute; inset: 4px; border: 1px solid #f5f3ee40 }
+    .cta .dark::after { content: ""; width: 14px; height: 1px; background: currentColor }
+    .cta .dark:hover { background: #34332f }
+    .cta .light { border: 1px solid #272b2740; background: #f5f3ee }
+    .cta .light:hover { border-color: var(--ink) }
+
+    /* Gruppen von Links als Zeilen mit Haarlinien */
+    .group { padding-top: 40px }
+    .group > .label { opacity: .55; padding-bottom: 12px }
+    .rows { list-style: none; border-top: 1px solid var(--hair) }
+    .rows li { border-bottom: 1px solid var(--hair) }
+    .rows a { display: flex; align-items: center; gap: 16px; padding: 17px 4px 16px; transition: background .25s, padding .25s }
+    .rows a:hover { background: #ece9e2; padding-left: 10px; padding-right: 10px }
+    .rows .t { flex: 1; min-width: 0 }
+    .rows b { display: block; font: 400 19px/1.25 var(--serif) }
+    .rows small { display: block; margin-top: 4px; font: 400 11px/1.45 var(--sans); letter-spacing: .03em; color: var(--ink2) }
+    .rows .arr { flex: none; width: 18px; height: 1px; background: currentColor; position: relative; transition: width .3s }
+    .rows .arr::after { content: ""; position: absolute; right: 0; top: -3px; width: 7px; height: 7px; border-top: 1px solid; border-right: 1px solid; transform: rotate(45deg) }
+    .rows a:hover .arr { width: 26px }
+    .rows .ext { font: 400 10px/1 var(--sans); letter-spacing: .1em; color: var(--ink2) }
+
+    /* Videos: drei Hochformate nebeneinander */
+    .videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
+    .videos a { display: block }
+    .videos figure { margin: 0; aspect-ratio: 9 / 16; overflow: hidden; background: #e9e6df }
+    .videos img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.16, 1, .3, 1) }
+    .videos a:hover img { transform: scale(1.04) }
+    .videos p { margin-top: 10px; font: italic 300 15px/1.3 var(--serif) }
+
+    /* Fuß: Impressum und Datenschutz klar lesbar, aber ruhig */
+    footer { max-width: 520px; margin: 56px auto 0; padding: 22px 24px calc(34px + env(safe-area-inset-bottom)); border-top: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap }
+    footer nav { display: flex; gap: 22px }
+    footer nav a { border-bottom: 1px solid currentColor; padding-bottom: 3px; opacity: .75 }
+    footer nav a:hover { opacity: 1 }
+    footer .copy { opacity: .5 }
+
+    /* Auftauchen beim Laden, sanft und gestaffelt */
+    @media (prefers-reduced-motion:no-preference) {
+      .rise { opacity: 0; transform: translateY(18px); animation: rise 1s cubic-bezier(.16, 1, .3, 1) forwards; animation-delay: calc(var(--i, 0) * 90ms) }
+      @keyframes rise { to { opacity: 1; transform: none } }
+    }
+
+    @media (max-width:430px) {
+      .cta a { font-size: 8.5px; letter-spacing: .16em; gap: 8px }
+      .cta .dark::after { display: none }
+    }
+
+    @media (min-width:900px) {
+      .intro { padding-top: 56px }
+      .intro h1 { font-size: 42px }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <a class="label legal" href="../impressum.html">Impressum</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="portrait rise" style="--i:0"><img src="../team/leonardo.jpg" alt="Leonardo Tsubasa Donati vor einer weißen Wand" width="1200" height="1600"></div>
+      <h1 class="rise" style="--i:1"><em>Leonardo Tsubasa</em></h1>
+      <p class="line rise" style="--i:3">[Ein Satz von Leonardo über sich, in seinen eigenen Worten.]</p>
+      <div class="cta rise" style="--i:4">
+        <a class="dark" href="https://bookings.zenchef.com/results?rid=381424" target="_blank" rel="noopener noreferrer">Tisch reservieren</a>
+        <a class="light" href="../index.html">Fukagawa Fine Dining</a>
+      </div>
+    </section>
+
+    <section class="group rise" style="--i:5" aria-label="Restaurants">
+      <p class="label">Restaurants</p>
+      <ul class="rows">
+        <li><a href="../index.html"><span class="t"><b>Fukagawa Fine Dining</b><small>Fichtestraße 31, Kreuzberg · Dienstag bis Samstag ab 17 Uhr</small></span><span class="arr" aria-hidden="true"></span></a></li>
+        <li><a href="../events.html"><span class="t"><b>Gruppen &amp; Events</b><small>Größere Gruppen und private Anlässe im Fine Dining</small></span><span class="arr" aria-hidden="true"></span></a></li>
+        <li><a href="https://fukagawa.de/" target="_blank" rel="noopener noreferrer"><span class="t"><b>Fukagawa Ramen</b><small>[Adresse und Öffnungszeiten]</small></span><span class="arr" aria-hidden="true"></span></a></li>
+      </ul>
+    </section>
+
+    <section class="group rise" style="--i:6" aria-label="Aus meiner Küche">
+      <p class="label">Aus meiner Küche</p>
+      <div class="videos">
+        <a href="https://www.youtube.com/shorts/DcYplgfy23M" target="_blank" rel="noopener noreferrer"><figure><img src="yt-DcYplgfy23M.jpg" alt="Videovorschau Chawanmushi" loading="lazy"></figure><p>Chawanmushi</p></a>
+        <a href="https://www.youtube.com/shorts/B-rZEG67qcg" target="_blank" rel="noopener noreferrer"><figure><img src="yt-B-rZEG67qcg.jpg" alt="Videovorschau handgeschmiedetes Messer" loading="lazy"></figure><p>Das Messer</p></a>
+        <a href="https://www.youtube.com/shorts/0XWQ5N9W-QQ" target="_blank" rel="noopener noreferrer"><figure><img src="yt-0XWQ5N9W-QQ.jpg" alt="Videovorschau Karaage" loading="lazy"></figure><p>Karaage</p></a>
+      </div>
+    </section>
+
+    <section class="group rise" style="--i:7" aria-label="Folgen">
+      <p class="label">Folgen</p>
+      <ul class="rows">
+        <li><a href="https://www.instagram.com/leonardo.tsubasa/" target="_blank" rel="noopener noreferrer"><span class="t"><b>Instagram</b><small>@leonardo.tsubasa</small></span><span class="arr" aria-hidden="true"></span></a></li>
+        <li><a href="https://www.youtube.com/@Leonardo.tsubasa" target="_blank" rel="noopener noreferrer"><span class="t"><b>YouTube</b><small>@Leonardo.tsubasa</small></span><span class="arr" aria-hidden="true"></span></a></li>
+        <li><a href="https://www.instagram.com/fukagawaberlin/" target="_blank" rel="noopener noreferrer"><span class="t"><b>Fukagawa Fine Dining</b><small>@fukagawaberlin</small></span><span class="arr" aria-hidden="true"></span></a></li>
+        <li><a href="https://www.instagram.com/fukagawaramen/" target="_blank" rel="noopener noreferrer"><span class="t"><b>Fukagawa Ramen</b><small>@fukagawaramen</small></span><span class="arr" aria-hidden="true"></span></a></li>
+      </ul>
+    </section>
+
+    <section class="group rise" style="--i:8" aria-label="Kontakt">
+      <p class="label">Kontakt</p>
+      <ul class="rows">
+        <li><a href="mailto:[kontakt@…]"><span class="t"><b>Kooperationen und Presse</b><small>[E-Mail-Adresse]</small></span><span class="arr" aria-hidden="true"></span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <nav class="label" aria-label="Rechtliches"><a href="../impressum.html">Impressum</a><a href="../impressum.html#datenschutz">Datenschutz</a></nav>
+    <span class="label copy">© 2026 Leonardo Tsubasa</span>
+  </footer>
+</body>
+
+</html>
