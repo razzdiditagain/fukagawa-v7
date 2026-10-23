@@ -24,7 +24,7 @@ Lies diese Datei vollständig, bevor du etwas änderst.
 
 - `index.html`: die Startseite. Alles steht in dieser einen Datei, CSS und JavaScript inline, ohne Build-Tools.
 - `events.html`: die Seite Gruppen & Events. Kopf, Styles, Navigation und Footer sind eine Kopie aus `index.html`. Änderst du dort etwas Gemeinsames, ändere es hier genauso.
-- `links/index.html`: die Link-Seite für Leonardos Instagram und YouTube, erreichbar unter `/links`. Name, Porträt und Links sind gesetzt, der Satz über ihn selbst ist ein [Platzhalter] für Leonardo.
+- `links/index.html`: die Link-Seite für Leonardos Instagram und YouTube, erreichbar unter `/links`. Name, Porträt und Links sind gesetzt, der Satz über ihn selbst ist ein [Platzhalter] für Leonardo. Die Seite hat ihr eigenes CSS in der Datei, mit denselben Farben und Schriften wie die Website. Änderungen an der Website übertragen sich nicht automatisch.
 - `impressum.html`: Platzhalter für Impressum und Datenschutz. Die Link-Seite und der Footer verlinken darauf, damit das Impressum von Social Media aus in zwei Klicks erreichbar ist.
 - `bilder/`, `galerie/`, `team/` und die Bilder im Hauptordner sind echte Fotos des Restaurants.
 - Die Seite ist als statisches HTML gebaut. Für WordPress muss sie übertragen werden, zum Beispiel als eigenes Theme oder als HTML-Blöcke. Wie, entscheidet ihr mit eurem Agenten.
